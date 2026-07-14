@@ -41,7 +41,7 @@ async function loadForecast() {
   resultsEl.innerHTML = "";
 
   try {
-    const raw = await fetchForecast(spot.lat, spot.lon, 7);
+    const raw = await fetchForecast(spot.lat, spot.lon, 14);
     const hours = evaluateHours(raw, criteria);
     render(hours);
     statusEl.textContent = "";
