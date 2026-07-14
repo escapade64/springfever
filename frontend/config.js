@@ -1,7 +1,7 @@
 const SPOTS = {
   default: {
     id: "default",
-    name: "Spot par défaut",
+    name: "La Corderie - Bréhat",
     lat: 48.8531149173526,
     lon: -3.011233363141454,
   },
