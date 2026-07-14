@@ -61,7 +61,7 @@ function render(hours) {
   resultsEl.innerHTML = "";
 
   if (goHours.length === 0) {
-    resultsEl.innerHTML = "<p>Aucun créneau favorable dans les prochains jours.</p>";
+    resultsEl.innerHTML = "<p>Aucun créneau favorable dans les 14 prochains jours.</p>";
     return;
   }
 
