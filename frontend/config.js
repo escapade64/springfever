@@ -28,6 +28,17 @@ const SPOTS = [
       tolerance: 20,
     },
   },
+  {
+    id: "leucate",
+    name: "Leucate",
+    lat: 42.89347043459993,
+    lon: 3.0153819500589245,
+    criteria: {
+      min_speed: 15,
+      direction_center: 280,
+      tolerance: 25,
+    },
+  },
 ];
 
 function getSpot(spotId) {
