@@ -3,27 +3,21 @@ const resultsEl = document.getElementById("results");
 const statusEl = document.getElementById("status");
 
 async function loadForecast() {
-  const min_speed = document.getElementById("min_speed").value;
-  const direction_center = document.getElementById("direction_center").value;
-  const tolerance = document.getElementById("tolerance").value;
+  const criteria = {
+    min_speed: Number(document.getElementById("min_speed").value),
+    direction_center: Number(document.getElementById("direction_center").value),
+    tolerance: Number(document.getElementById("tolerance").value),
+  };
 
-  const params = new URLSearchParams({
-    spot: "default",
-    activity: "windsurf",
-    min_speed,
-    direction_center,
-    tolerance,
-    days: 7,
-  });
+  const spot = getSpot("default");
 
   statusEl.textContent = "Chargement...";
   resultsEl.innerHTML = "";
 
   try {
-    const res = await fetch(`/api/forecast?${params}`);
-    if (!res.ok) throw new Error(`Erreur API (${res.status})`);
-    const data = await res.json();
-    render(data.hours);
+    const raw = await fetchForecast(spot.lat, spot.lon, 7);
+    const hours = evaluateHours(raw, criteria);
+    render(hours);
     statusEl.textContent = "";
   } catch (err) {
     statusEl.textContent = `Erreur : ${err.message}`;
