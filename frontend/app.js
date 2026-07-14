@@ -1,6 +1,32 @@
 const form = document.getElementById("criteria-form");
 const resultsEl = document.getElementById("results");
 const statusEl = document.getElementById("status");
+const spotSelectorEl = document.getElementById("spot-selector");
+
+let currentSpotId = SPOTS[0].id;
+
+function fillCriteriaForm(criteria) {
+  document.getElementById("min_speed").value = criteria.min_speed;
+  document.getElementById("direction_center").value = criteria.direction_center;
+  document.getElementById("tolerance").value = criteria.tolerance;
+}
+
+function renderSpotSelector() {
+  spotSelectorEl.innerHTML = "";
+  for (const spot of SPOTS) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = spot.name;
+    btn.className = "spot-btn" + (spot.id === currentSpotId ? " active" : "");
+    btn.addEventListener("click", () => {
+      currentSpotId = spot.id;
+      fillCriteriaForm(spot.criteria);
+      renderSpotSelector();
+      loadForecast();
+    });
+    spotSelectorEl.appendChild(btn);
+  }
+}
 
 async function loadForecast() {
   const criteria = {
@@ -9,7 +35,7 @@ async function loadForecast() {
     tolerance: Number(document.getElementById("tolerance").value),
   };
 
-  const spot = getSpot("default");
+  const spot = getSpot(currentSpotId);
 
   statusEl.textContent = "Chargement...";
   resultsEl.innerHTML = "";
@@ -73,4 +99,6 @@ form.addEventListener("submit", (e) => {
   loadForecast();
 });
 
+renderSpotSelector();
+fillCriteriaForm(getSpot(currentSpotId).criteria);
 loadForecast();

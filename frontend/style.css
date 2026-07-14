@@ -12,9 +12,32 @@ body {
   padding: 1rem;
 }
 
-.subtitle {
+.activity {
   color: #888;
   margin-top: -0.5rem;
+}
+
+#spot-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.spot-btn {
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.spot-btn.active {
+  background: var(--go);
+  color: white;
+  border-color: var(--go);
+  font-weight: 600;
 }
 
 #criteria-form {
