@@ -1,4 +1,6 @@
-# SpringFever
+# springfever
+
+Comment choisir l'activité du week-end ?
 
 Visualise les fenêtres météo favorables pour des sorties outdoor (planche à voile, surf, alpinisme...) à partir des prévisions [Open-Meteo](https://open-meteo.com/).
 
