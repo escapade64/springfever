@@ -25,21 +25,26 @@ async function loadForecast() {
 }
 
 function render(hours) {
-  const daylightHours = hours.filter((h) => h.daylight);
+  const goHours = hours.filter((h) => h.go);
   const byDay = {};
-  for (const h of daylightHours) {
+  for (const h of goHours) {
     const day = h.time.slice(0, 10);
     (byDay[day] ??= []).push(h);
   }
 
   resultsEl.innerHTML = "";
+
+  if (goHours.length === 0) {
+    resultsEl.innerHTML = "<p>Aucun créneau favorable dans les prochains jours.</p>";
+    return;
+  }
+
   for (const [day, slots] of Object.entries(byDay)) {
     const dayEl = document.createElement("div");
     dayEl.className = "day";
 
     const title = document.createElement("h2");
-    const goCount = slots.filter((s) => s.go).length;
-    title.textContent = `${formatDay(day)} - ${goCount} creneau(x) favorable(s)`;
+    title.textContent = `${formatDay(day)} - ${slots.length} creneau(x) favorable(s)`;
     dayEl.appendChild(title);
 
     const slotsEl = document.createElement("div");
@@ -47,7 +52,7 @@ function render(hours) {
 
     for (const s of slots) {
       const slotEl = document.createElement("div");
-      slotEl.className = "slot" + (s.go ? " go" : "");
+      slotEl.className = "slot go";
       const time = s.time.slice(11, 16);
       slotEl.innerHTML = `<span class="time">${time}</span>${Math.round(s.wind_speed)}kt ${Math.round(s.wind_direction)}deg`;
       slotsEl.appendChild(slotEl);
