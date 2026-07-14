@@ -1,0 +1,29 @@
+<meta charset="utf-8" />
+<title>SpringFever - Fenetres meteo outdoor</title>
+<link rel="stylesheet" href="style.css" />
+
+<header>
+  <h1>SpringFever</h1>
+  <p class="subtitle">Planche a voile - Spot par defaut</p>
+</header>
+
+<form id="criteria-form">
+  <label>
+    Vent min (noeuds)
+    <input type="number" id="min_speed" value="15" min="0" step="1" />
+  </label>
+  <label>
+    Direction (degres, 0=N, 90=E, 180=S, 270=O)
+    <input type="number" id="direction_center" value="270" min="0" max="360" step="1" />
+  </label>
+  <label>
+    Tolerance (+/- degres)
+    <input type="number" id="tolerance" value="30" min="0" max="180" step="1" />
+  </label>
+  <button type="submit">Actualiser</button>
+</form>
+
+<div id="status"></div>
+<div id="results"></div>
+
+<script src="app.js"></script>
